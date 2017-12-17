@@ -136,3 +136,10 @@ set textwidth=120
 
 " Exibe linha vertical
 :set cursorcolumn
+
+" Função para remover espaços ao final da linha
+function! RemoveEspacoFinalLinha()
+    silent! :%s/\s*$//g
+    silent! noh
+endfunction
+map <C-n> :call RemoveEspacoFinalLinha()<CR>
