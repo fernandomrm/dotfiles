@@ -127,3 +127,12 @@ function! Tab_Or_Complete()
 endfunction
 :inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 :set dictionary="/usr/dict/words"
+
+" Posiciona cursor no primeiro caractere da linha
+map 0 ^
+
+" Define largura do texto
+set textwidth=120
+
+" Exibe linha vertical
+:set cursorcolumn
