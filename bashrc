@@ -106,3 +106,8 @@ if [[ -f "$HOME/.fzf.bash" ]]; then
     export FZF_DEFAULT_OPTS="--height 100%"
     export FZF_CTRL_T_OPTS="--preview 'head -100 {}'"
 fi
+
+if [[ -d "$HOME/.asdf" ]]; then
+    . $HOME/.asdf/asdf.sh
+    . $HOME/.asdf/completions/asdf.bash
+fi
