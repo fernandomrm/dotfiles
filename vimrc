@@ -8,7 +8,6 @@ if isdirectory(expand($HOME . '/.vim/bundle/Vundle.vim/'))
         " Plugins
         Plugin 'airblade/vim-gitgutter'
         Plugin 'bling/vim-airline'
-        Plugin 'fatih/vim-go'
         Plugin 'kien/ctrlp.vim'
         Plugin 'mattn/emmet-vim'
         Plugin 'plasticboy/vim-markdown'
