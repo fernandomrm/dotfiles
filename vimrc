@@ -16,6 +16,7 @@ if isdirectory(expand($HOME . '/.vim/bundle/Vundle.vim/'))
         Plugin 'tpope/vim-eunuch'
         Plugin 'w0rp/ale'
         Plugin 'nvie/vim-flake8'
+        Plugin 'sheerun/vim-polyglot'
         " Themes
         Plugin 'altercation/vim-colors-solarized'
         Plugin 'vim-airline/vim-airline-themes'
