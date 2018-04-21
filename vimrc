@@ -107,7 +107,7 @@ if isdirectory(expand($HOME . '/.vim/bundle/Vundle.vim/'))
 
     if isdirectory(expand($HOME . '/.vim/bundle/ctrlp.vim/'))
         if executable('ag')
-            let g:ctrlp_user_command = 'ag %s -g ""'
+            let g:ctrlp_user_command = 'ag %s --hidden -g ""'
         endif
     endif
 
