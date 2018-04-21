@@ -32,12 +32,17 @@ done
 
 eval "$(dircolors)"
 
+if hash vim 2> /dev/null; then
+    EDITOR=$(which vim)
+    export EDITOR
+fi
+
 if [[ -f /etc/redhat-release ]]; then
     PS1_SEP=" "
 else
     PS1_SEP=":"
 fi
-export PS1="[\[\e[01;31m\]\u\[\e[01;36m\]@\[\e[01;34m\]\h\[\e[m\]${PS1_SEP}\[\e[01;37m\]\w\[\e[m\]]\$ "
+export PS1='[\[\e[01;31m\]\u\[\e[01;36m\]@\[\e[01;34m\]\h\[\e[m\]${PS1_SEP}\[\e[01;37m\]\w\[\e[m\]]\$ '
 
 if [[ -f "$HOME/.no_history" ]]; then
     unset HISTFILE
@@ -53,6 +58,12 @@ function short_prompt {
     export PS1='\[\e[01;37m\]\$\e[m\] '
 }
 
+if [[ -d "$HOME/go" ]]; then
+    export GOPATH="$HOME/go"
+    export GOBIN="$GOPATH/bin"
+    export PATH="$GOBIN:$PATH"
+fi
+
 if [[ -d "$HOME/.pyenv" ]]; then
     export PATH="$HOME/.pyenv/bin:$PATH"
     eval "$(pyenv init -)"
@@ -62,6 +73,12 @@ fi
 if [[ -d "$HOME/.rbenv" ]]; then
     eval "$(rbenv init -)"
 fi
+
+# Fix SSH_AUTH_SOCK for screen sessions
+if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
+    ln -fs "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh_auth_sock"
+fi
+export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
 
 case "$TERM" in
     screen*)
@@ -74,7 +91,7 @@ esac
 
 # Vi mode for interactive terminal:
 if [[ $- == *i* ]]; then
-    bind -m vi-insert "\C-l":clear-screen
+    bind -m vi-insert '\C-l':clear-screen
     set -o vi
 fi
 

@@ -22,71 +22,74 @@ if isdirectory(expand($HOME . '/.vim/bundle/Vundle.vim/'))
     call vundle#end()
 endif
 
-" Desabilitar o mouse
+" Disable mouse
 set mouse=
 
-" Desabilitar backups
+" Disable backups
 set nobackup
 set noswapfile
 set nowritebackup
 
-" Desabilitar o viminfo
+" Disable viminfo
 set viminfo=
 
-" Tabs por espaços
+" Replace tabs for spaces
 set expandtab
 set shiftwidth=4
 set tabstop=4
 
-" Indentação e sintaxe
+" Indentation and syntax
 filetype plugin indent on
 set autoindent
 syntax on
-" Por tipo de arquivo
+" Indentation settings per file type
+au FileType javascript setl sw=2 ts=2 et
+au FileType json setl sw=2 ts=2 et
 au FileType yaml setl sw=2 ts=2 et
 
-" Régua, quebra e número de linhas
+" Viewing options, like cursor position and number of lines
+set cursorline
 set linebreak
 set number
 set ruler
+set wildmenu
 
-" Indicador de posição do cursor
-set cursorline
+" Fix ESC delay
+set ttimeoutlen=0
 
-" Exibição de caracteres invisíveis
+" Toggle hidden characters
 map <silent> <C-m> :set list!<CR>
 set listchars=tab:▸\ ,eol:¬
 
-" Navegação entre janelas
+" Navigation between windows
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-" Navegação entre abas
+" Navigation between tabs
 map <Tab> gt
 map <S-Tab> gT
 
-" Busca
+" Search options
 set hlsearch
 set ignorecase
 set incsearch
 
-" Limpar os resultados destacados
+" Clear search results highlights
 nmap <silent> <C-C> :silent noh<CR>
 
-" Fonte e janela
+" File encoding
 set encoding=utf-8
-set wildmenu
 
 " Omnicomplete
 inoremap <Nul> <C-x><C-o>
 
-" Fechar automaticamente a janela de preview
+" Close preview window automatically
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
-" Configurações específicas dos plugins
+" Settings per plugin/theme
 if isdirectory(expand($HOME . '/.vim/bundle/Vundle.vim/'))
     if isdirectory(expand($HOME . '/.vim/bundle/vim-colors-solarized/'))
         if has('gui_running')
@@ -97,6 +100,8 @@ if isdirectory(expand($HOME . '/.vim/bundle/Vundle.vim/'))
         let g:solarized_termcolors=256
         set t_Co=256
         colorscheme solarized
+        " Fix spell checker highlighting
+        hi SpellBad cterm=underline
     endif
 
     if isdirectory(expand($HOME . '/.vim/bundle/ctrlp.vim/'))
