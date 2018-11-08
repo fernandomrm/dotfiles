@@ -33,7 +33,7 @@ done
 eval "$(dircolors)"
 
 if hash vim 2> /dev/null; then
-    EDITOR=$(which vim)
+    EDITOR=$(command -v vim)
     export EDITOR
 fi
 
@@ -42,7 +42,20 @@ if [[ -f /etc/redhat-release ]]; then
 else
     PS1_SEP=":"
 fi
-export PS1='[\[\e[01;31m\]\u\[\e[01;36m\]@\[\e[01;34m\]\h\[\e[m\]${PS1_SEP}\[\e[01;37m\]\w\[\e[m\]]\$ '
+
+# Prompt colors
+BLUE='\[\e[94;1m\]'
+CLEAR='\[\e[0m\]'
+CYAN='\[\e[96;1m\]'
+RED='\[\e[91;1m\]'
+WHITE='\[\e[97;1m\]'
+
+export PS1="[${RED}\\u${CYAN}@${BLUE}\\h${CLEAR}${PS1_SEP}${WHITE}\\w${CLEAR}]\\$ "
+
+# Short prompt for presentations:
+function short_prompt {
+    export PS1="${WHITE}\\$ $CLEAR"
+}
 
 if [[ -f "$HOME/.no_history" ]]; then
     unset HISTFILE
@@ -52,16 +65,16 @@ else
 fi
 
 export LANG="en_US.UTF-8"
-
-# Short prompt for presentations:
-function short_prompt {
-    export PS1='\[\e[01;37m\]\$\e[m\] '
-}
+export LC_ALL="en_US.UTF-8"
 
 if [[ -d "$HOME/go" ]]; then
     export GOPATH="$HOME/go"
     export GOBIN="$GOPATH/bin"
     export PATH="$GOBIN:$PATH"
+fi
+
+if [[ -d "$HOME/.nodenv" ]]; then
+    eval "$(nodenv init -)"
 fi
 
 if [[ -d "$HOME/.pyenv" ]]; then

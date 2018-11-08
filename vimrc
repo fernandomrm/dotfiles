@@ -44,6 +44,7 @@ filetype plugin indent on
 set autoindent
 syntax on
 " Indentation settings per file type
+au FileType html setl sw=2 ts=2 et
 au FileType javascript setl sw=2 ts=2 et
 au FileType json setl sw=2 ts=2 et
 au FileType yaml setl sw=2 ts=2 et
@@ -76,6 +77,7 @@ map <S-Tab> gT
 set hlsearch
 set ignorecase
 set incsearch
+set smartcase
 
 " Clear search results highlights
 nmap <silent> <C-C> :silent noh<CR>
